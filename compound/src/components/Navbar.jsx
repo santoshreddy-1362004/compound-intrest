@@ -9,9 +9,17 @@ export default function Navbar({ setPage }) {
       <Toolbar>
         <Box display="flex" alignItems="center" gap={1}>
           <img src={compoundLogo} alt="Compound Logo" style={{ height: '28px' }} />
-          <Typography variant="h6" component="div" className="electric-text">
-            Interest Calculator
-          </Typography>
+         <Typography
+  variant="h6"
+  component="div"
+  sx={{
+    color: '#f1f5f9',
+    fontWeight: 600,
+    letterSpacing: '0.5px'
+  }}
+>
+  Interest Calculator
+</Typography>
         </Box>
 
         <Box flexGrow={1} />

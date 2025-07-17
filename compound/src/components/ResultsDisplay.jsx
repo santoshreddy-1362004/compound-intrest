@@ -37,9 +37,16 @@ export default function ResultsDisplay({ result }) {
       {/* Final Balance */}
       <Box mt={2}>
         <Typography variant="body2" sx={{ color: '#93c5fd' }}>Final Balance</Typography>
-        <Typography variant="h5" className="electric-text" sx={{ fontWeight: 'bold' }}>
-          {parseFloat(finalBalance).toFixed(2)} {token}
-        </Typography>
+        <Typography
+  variant="h5"
+  sx={{
+    fontWeight: 'bold',
+    color: '#f8fafc', // clean white/gray text
+    textShadow: 'none', // remove any glow
+  }}
+>
+  {parseFloat(finalBalance).toFixed(2)} {token}
+</Typography>
       </Box>
 
       {/* APR Info */}

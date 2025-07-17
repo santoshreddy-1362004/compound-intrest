@@ -35,9 +35,17 @@ export default function Resources() {
     <Box sx={{ py: 4 }}>
       {/* Neon Heading */}
       <Box textAlign="center" mb={6}>
-        <Typography variant="h3" className="electric-text" sx={{ fontWeight: 'bold' }}>
-          🔗 Resources for DeFi Builders
-        </Typography>
+       <Typography
+  variant="h3"
+  sx={{
+    fontWeight: 'bold',
+    color: '#f8fafc', // clean, bright white
+    textShadow: '0 0 8px rgba(147, 197, 255, 0.1)', // subtle electric-blue hint
+    letterSpacing: '1px',
+  }}
+>
+  🔗 Resources for DeFi Builders
+</Typography>
         <Typography variant="body1" sx={{ color: '#bfdbfe', mt: 1 }}>
           Everything you need to build with Compound Finance.
         </Typography>

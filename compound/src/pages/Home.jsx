@@ -33,11 +33,37 @@ export default function Home() {
   return (
     <div>
       
-<div className="glow-card electric-text" style={{ marginBottom: '1.5rem', textAlign: 'center', padding: '1rem' }}>
-  <h2>⚡ Compound Interest Calculator</h2>
-  <p>See how your assets grow over time using Compound Finance.</p>
-</div>
+<div className="glow-card" style={{ marginBottom: '1.5rem', textAlign: 'center', padding: '1rem' }}>
+  <h2 style={{
+    margin: 0,
+    color: '#f1f5f9',
+    fontWeight: '600',
+    fontSize: '1.8rem',
+    animation: 'glow 2s ease-in-out infinite',
+    fontFamily: '"Inter", sans-serif'
+  }}>
+    ⚡ Compound Interest Calculator
+  </h2>
+  <p style={{
+    margin: '0.5rem 0 0 0',
+    color: '#cbd5e1',
+    fontSize: '1rem'
+  }}>
+    See how your assets grow over time using Compound Finance.
+  </p>
 
+  {/* Add this style inside your component or in index.css */}
+  <style jsx>{`
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 5px #f1f5f9, 0 0 10px #f1f5f9;
+      }
+      21% {
+        text-shadow: 0 0 10px #f8fafc, 0 0 20px #f8fafc;
+      }
+    }
+  `}</style>
+</div>
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
         {/* Left Side */}
         <div style={{ flex: 1, minWidth: '300px' }}>
