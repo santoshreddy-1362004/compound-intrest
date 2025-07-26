@@ -5,6 +5,9 @@ A comprehensive decentralized finance (DeFi) platform built on top of Compound P
 ## working link
 https://compound-intrest-omega.vercel.app/
 
+## preview
+![Calculator Illustration](compound/public/calculator-illustration.png)
+
 
 ## 🌟 Features
 
