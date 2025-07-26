@@ -2,7 +2,7 @@
 
 A comprehensive decentralized finance (DeFi) platform built on top of Compound Protocol, providing real-time lending, borrowing, and portfolio management capabilities.
 
-![Calculator Illustration](.public/calculator-illustration.png)
+![Platform Screenshot](./public/calculator-illustration.png)
 
 
 ## 🌟 Features
