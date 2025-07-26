@@ -12,7 +12,19 @@ export default function TokenSelector({ onTokenChange }) {
 
   return (
     <FormControl fullWidth size="small" className="glow-card" sx={{ padding: '1rem' }}>
-      <InputLabel id="token-select-label" className="electric-text">
+      <InputLabel 
+        id="token-select-label" 
+        sx={{
+          color: '#ffffff',
+          fontWeight: 'bold',
+          '&.Mui-focused': {
+            color: '#ffffff',
+          },
+          '&.MuiFormLabel-filled': {
+            color: '#ffffff',
+          }
+        }}
+      >
         Select Token
       </InputLabel>
       <Select
@@ -22,8 +34,47 @@ export default function TokenSelector({ onTokenChange }) {
         onChange={(e) => setToken(e.target.value)}
         sx={{
           backgroundColor: '#1e293b',
-          color: '#93c5fd',
+          color: '#ffffff',
           borderRadius: 2,
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#93c5fd',
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#60a5fa',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#60a5fa',
+          },
+          '& .MuiSelect-select': {
+            color: '#ffffff',
+            fontWeight: 'bold',
+          },
+          '& .MuiSvgIcon-root': {
+            color: '#93c5fd',
+          }
+        }}
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              bgcolor: '#1e293b',
+              border: '1px solid #93c5fd',
+              '& .MuiMenuItem-root': {
+                color: '#e2e8f0',
+                '&:hover': {
+                  backgroundColor: 'rgba(147, 197, 253, 0.1)',
+                  color: '#ffffff',
+                },
+                '&.Mui-selected': {
+                  backgroundColor: 'rgba(147, 197, 253, 0.2)',
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    backgroundColor: 'rgba(147, 197, 253, 0.3)',
+                  }
+                }
+              }
+            }
+          }
         }}
       >
         <MenuItem value="DAI">DAI - Dai Stablecoin</MenuItem>

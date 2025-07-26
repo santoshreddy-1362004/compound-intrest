@@ -18,7 +18,7 @@ export default function Navbar({ setPage }) {
     letterSpacing: '0.5px'
   }}
 >
-  DeFi Platform
+  Compound DeFi Platform
 </Typography>
         </Box>
 
@@ -137,6 +137,29 @@ export default function Navbar({ setPage }) {
             }}
           >
             About
+          </Button>
+
+          <Button
+            onClick={() => setPage('resources')}
+            sx={{
+              color: '#93c5fd',
+              textTransform: 'none',
+              fontWeight: 500,
+              borderRadius: 2,
+              paddingX: 2,
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                bgcolor: 'rgba(251, 191, 36, 0.1)',
+                boxShadow: '0 0 10px rgba(251, 191, 36, 0.6)',
+                transform: 'scale(1.05)',
+                color: '#fbbf24',
+              },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
+            }}
+          >
+            🔗 Resources
           </Button>
         </Box>
       </Toolbar>

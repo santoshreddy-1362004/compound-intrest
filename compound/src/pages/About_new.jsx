@@ -43,7 +43,7 @@ export default function About() {
     {
       icon: <AssessmentIcon sx={{ fontSize: 48, color: '#60a5fa' }} />,
       title: 'Real-Time Data',
-      description: 'Connected  Compound V3 rates. No fake data - see actual market conditions.',
+      description: 'Connected to DefiLlama API for live Compound V3 rates. No fake data - see actual market conditions.',
       color: '#60a5fa'
     }
   ];
@@ -88,18 +88,16 @@ export default function About() {
         <Typography variant="h4" className="electric-text" gutterBottom textAlign="center">
           🏦 What is Compound Protocol?
         </Typography>
-        <Grid container spacing={4} alignItems="stretch">
+        <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6}>
-            <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <Typography variant="body1" paragraph sx={{ color: '#e2e8f0', fontSize: '1.1rem', lineHeight: 1.7 }}>
-                <strong>Compound</strong> is a decentralized finance (DeFi) protocol that allows users to lend and borrow 
-                cryptocurrencies without traditional intermediaries. It operates through smart contracts on the Ethereum blockchain.
-              </Typography>
-              <Typography variant="body1" paragraph sx={{ color: '#e2e8f0', fontSize: '1.1rem', lineHeight: 1.7 }}>
-                Users can supply assets to earn interest or borrow assets by posting collateral. Interest rates are determined 
-                algorithmically based on supply and demand, updating in real-time.
-              </Typography>
-            </Box>
+            <Typography variant="body1" paragraph sx={{ color: '#e2e8f0', fontSize: '1.1rem', lineHeight: 1.7 }}>
+              <strong>Compound</strong> is a decentralized finance (DeFi) protocol that allows users to lend and borrow 
+              cryptocurrencies without traditional intermediaries. It operates through smart contracts on the Ethereum blockchain.
+            </Typography>
+            <Typography variant="body1" paragraph sx={{ color: '#e2e8f0', fontSize: '1.1rem', lineHeight: 1.7 }}>
+              Users can supply assets to earn interest or borrow assets by posting collateral. Interest rates are determined 
+              algorithmically based on supply and demand, updating in real-time.
+            </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Box 
@@ -108,11 +106,7 @@ export default function About() {
                 border: '2px solid rgba(59, 130, 246, 0.3)',
                 borderRadius: 3, 
                 p: 3,
-                textAlign: 'center',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
+                textAlign: 'center'
               }}
             >
               <Typography variant="h5" sx={{ color: '#60a5fa', mb: 2, fontWeight: 'bold' }}>
@@ -181,7 +175,7 @@ export default function About() {
         </Typography>
         <Grid container spacing={4} mt={2}>
           <Grid item xs={12} md={3}>
-            <Box textAlign="center" p={2} sx={{ height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Box textAlign="center" p={2}>
               <Box sx={{ 
                 width: 60, 
                 height: 60, 
@@ -206,7 +200,7 @@ export default function About() {
             </Box>
           </Grid>
           <Grid item xs={12} md={3}>
-            <Box textAlign="center" p={2} sx={{ height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Box textAlign="center" p={2}>
               <Box sx={{ 
                 width: 60, 
                 height: 60, 
@@ -231,7 +225,7 @@ export default function About() {
             </Box>
           </Grid>
           <Grid item xs={12} md={3}>
-            <Box textAlign="center" p={2} sx={{ height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Box textAlign="center" p={2}>
               <Box sx={{ 
                 width: 60, 
                 height: 60, 
@@ -256,7 +250,7 @@ export default function About() {
             </Box>
           </Grid>
           <Grid item xs={12} md={3}>
-            <Box textAlign="center" p={2} sx={{ height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <Box textAlign="center" p={2}>
               <Box sx={{ 
                 width: 60, 
                 height: 60, 
@@ -283,77 +277,23 @@ export default function About() {
         </Grid>
       </Box>
 
-      {/* Developer Info */}
+      {/* Disclaimer */}
       <Box 
         sx={{ 
-          bgcolor: 'rgba(34, 197, 94, 0.1)', 
-          border: '1px solid rgba(34, 197, 94, 0.3)',
+          bgcolor: 'rgba(239, 68, 68, 0.1)', 
+          border: '1px solid rgba(239, 68, 68, 0.3)',
           borderRadius: 3, 
           p: 4,
           textAlign: 'center'
         }}
       >
-        <Typography variant="h6" sx={{ color: '#4ade80', mb: 3, fontWeight: 'bold' }}>
-          👨‍💻 Built by Santosh Reddy
+        <Typography variant="h6" sx={{ color: '#f87171', mb: 2, fontWeight: 'bold' }}>
+          ⚠️ Educational Demo Platform
         </Typography>
-        <Typography variant="body1" sx={{ color: '#a7f3d0', mb: 3 }}>
-          Full-stack developer passionate about DeFi and blockchain technology. 
-          This platform demonstrates real-world integration with Compound Protocol using modern web technologies.
+        <Typography variant="body2" sx={{ color: '#fca5a5' }}>
+          This is a demonstration platform for educational purposes. While it uses real Compound Protocol rates, 
+          all transactions are simulated. Always do your own research before using actual DeFi protocols.
         </Typography>
-        <Box display="flex" gap={3} justifyContent="center" flexWrap="wrap">
-          <Box 
-            component="a"
-            href="https://www.linkedin.com/in/santosh-reddy-95a342283"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              color: '#60a5fa',
-              textDecoration: 'none',
-              padding: '8px 16px',
-              border: '1px solid rgba(96, 165, 250, 0.3)',
-              borderRadius: 2,
-              bgcolor: 'rgba(96, 165, 250, 0.1)',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                bgcolor: 'rgba(96, 165, 250, 0.2)',
-                border: '1px solid rgba(96, 165, 250, 0.6)',
-                transform: 'translateY(-2px)'
-              }
-            }}
-          >
-            <Typography sx={{ fontSize: '20px' }}>💼</Typography>
-            <Typography variant="body2" fontWeight="bold">LinkedIn</Typography>
-          </Box>
-          <Box 
-            component="a"
-            href="https://github.com/santoshreddy-1362004/compound-intrest"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              color: '#a78bfa',
-              textDecoration: 'none',
-              padding: '8px 16px',
-              border: '1px solid rgba(167, 139, 250, 0.3)',
-              borderRadius: 2,
-              bgcolor: 'rgba(167, 139, 250, 0.1)',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                bgcolor: 'rgba(167, 139, 250, 0.2)',
-                border: '1px solid rgba(167, 139, 250, 0.6)',
-                transform: 'translateY(-2px)'
-              }
-            }}
-          >
-            <Typography sx={{ fontSize: '20px' }}>🐙</Typography>
-            <Typography variant="body2" fontWeight="bold">GitHub</Typography>
-          </Box>
-        </Box>
       </Box>
     </Box>
   );
