@@ -1,20 +1,35 @@
 // src/components/InterestForm.jsx
 import React, { useState } from 'react';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Typography } from '@mui/material';
+import CalculateIcon from '@mui/icons-material/Calculate';
 
-export default function InterestForm({ token, onCalculate }) {
+export default function InterestForm({ token, onCalculate, loading = false }) {
   const [amount, setAmount] = useState('');
   const [days, setDays] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (amount && days) {
+      // Pass amount and days - token is already in parent state
       onCalculate({ amount, days });
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} className="glow-card">
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      noValidate
+      className="glow-card"
+      sx={{ padding: '1.5rem' }}
+    >
+      <Box display="flex" alignItems="center" gap={1} mb={2}>
+        <CalculateIcon sx={{ color: '#60a5fa' }} />
+        <Typography variant="h6" className="electric-text">
+          💰 Calculate Your Yield
+        </Typography>
+      </Box>
+
       <TextField
         margin="normal"
         required
@@ -28,12 +43,8 @@ export default function InterestForm({ token, onCalculate }) {
         sx={{
           '& .MuiOutlinedInput-root': {
             borderColor: '#93c5fd',
-            '& fieldset': {
-              borderColor: '#93c5fd',
-            },
-            '&:hover fieldset': {
-              borderColor: '#60a5fa',
-            },
+            '& fieldset': { borderColor: '#93c5fd' },
+            '&:hover fieldset': { borderColor: '#60a5fa' },
           },
         }}
       />
@@ -50,38 +61,34 @@ export default function InterestForm({ token, onCalculate }) {
         sx={{
           '& .MuiOutlinedInput-root': {
             borderColor: '#93c5fd',
-            '& fieldset': {
-              borderColor: '#93c5fd',
-            },
-            '&:hover fieldset': {
-              borderColor: '#60a5fa',
-            },
+            '& fieldset': { borderColor: '#93c5fd' },
+            '&:hover fieldset': { borderColor: '#60a5fa' },
           },
         }}
       />
 
-      {/* Animated Rainbow Submit Button */}
       <Button
         type="submit"
         fullWidth
         variant="contained"
+        disabled={loading}
         className="rainbow-button"
         sx={{
           mt: 3,
-          mb: 2,
+          mb: 1,
           fontWeight: 'bold',
           borderRadius: 2,
-          padding: '0.6rem',
+          padding: '0.8rem',
           textTransform: 'uppercase',
           letterSpacing: '1px',
-          fontSize: '1rem',
+          fontSize: '1.1rem',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           gap: 1,
         }}
       >
-        🌈 Calculate Yield
+        {loading ? '⏳ Fetching Live Rates...' : '🚀 Calculate Yield'}
       </Button>
     </Box>
   );

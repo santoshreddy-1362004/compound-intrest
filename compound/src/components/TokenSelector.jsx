@@ -4,43 +4,34 @@ import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 export default function TokenSelector({ onTokenChange }) {
   const [token, setToken] = useState('DAI');
-  const [supplyRate, setSupplyRate] = useState('--');
 
   useEffect(() => {
-    const fetchRate = async () => {
-      const { getSupplyRate } = require('../utils/compound');
-      const rate = await getSupplyRate(token);
-      setSupplyRate(rate);
-    };
-    fetchRate();
-  }, [token]);
-
-  const handleChange = (e) => {
-    const newToken = e.target.value;
-    setToken(newToken);
-    onTokenChange(newToken, supplyRate);
-  };
+    // Just notify parent of token change, don't fetch rates here
+    if (onTokenChange) onTokenChange(token);
+  }, [token, onTokenChange]);
 
   return (
-    <FormControl fullWidth size="small" className="glow-card" sx={{ padding: '0.5rem' }}>
-      <InputLabel id="token-select-label" className="electric-text">Token</InputLabel>
+    <FormControl fullWidth size="small" className="glow-card" sx={{ padding: '1rem' }}>
+      <InputLabel id="token-select-label" className="electric-text">
+        Select Token
+      </InputLabel>
       <Select
         labelId="token-select-label"
         value={token}
-        label="Token"
-        onChange={handleChange}
+        label="Select Token"
+        onChange={(e) => setToken(e.target.value)}
         sx={{
           backgroundColor: '#1e293b',
           color: '#93c5fd',
           borderRadius: 2,
         }}
       >
-        <MenuItem value="DAI">DAI</MenuItem>
-        <MenuItem value="USDC">USDC</MenuItem>
-        <MenuItem value="ETH">ETH</MenuItem>
+        <MenuItem value="DAI">DAI - Dai Stablecoin</MenuItem>
+        <MenuItem value="USDC">USDC - USD Coin</MenuItem>
+        <MenuItem value="ETH">ETH - Ethereum</MenuItem>
       </Select>
-      <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#bfdbfe' }}>
-        Supply Rate: {supplyRate}
+      <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#bfdbfe', textAlign: 'center' }}>
+        📊 Live rates fetched on calculation
       </p>
     </FormControl>
   );

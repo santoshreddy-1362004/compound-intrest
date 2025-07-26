@@ -35,17 +35,17 @@ export default function Resources() {
     <Box sx={{ py: 4 }}>
       {/* Neon Heading */}
       <Box textAlign="center" mb={6}>
-       <Typography
-  variant="h3"
-  sx={{
-    fontWeight: 'bold',
-    color: '#f8fafc', // clean, bright white
-    textShadow: '0 0 8px rgba(147, 197, 255, 0.1)', // subtle electric-blue hint
-    letterSpacing: '1px',
-  }}
->
-  🔗 Resources for DeFi Builders
-</Typography>
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: 'bold',
+            color: '#f8fafc',
+            textShadow: '0 0 8px rgba(147, 197, 255, 0.1)',
+            letterSpacing: '1px',
+          }}
+        >
+          🔗 Resources for DeFi Builders
+        </Typography>
         <Typography variant="body1" sx={{ color: '#bfdbfe', mt: 1 }}>
           Everything you need to build with Compound Finance.
         </Typography>
@@ -54,16 +54,19 @@ export default function Resources() {
       {/* Cards Section */}
       <Grid container spacing={4} justifyContent="center">
         {cardData.map((card, index) => (
-          <Grid item xs={12} md={6} key={index}>
+          <Grid item xs={12} md={6} key={index} sx={{ display: 'flex' }}>
             <Box
               className="glow-card"
               sx={{
                 padding: '1.5rem',
                 minHeight: '160px',
-                transform: 'translateX(0)',
-                transition: 'transform 0.5s ease-out',
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'transform 0.3s ease',
                 '&:hover': {
-                  transform: 'translateX(-10px)',
+                  transform: 'translateX(-8px)',
                 },
                 cursor: 'pointer'
               }}
