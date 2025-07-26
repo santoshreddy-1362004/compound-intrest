@@ -18,7 +18,7 @@ export default function Navbar({ setPage }) {
     letterSpacing: '0.5px'
   }}
 >
-  Interest Calculator
+  DeFi Platform
 </Typography>
         </Box>
 
@@ -45,7 +45,76 @@ export default function Navbar({ setPage }) {
               },
             }}
           >
-            Home
+            Calculator
+          </Button>
+
+          <Button
+            onClick={() => setPage('lending')}
+            sx={{
+              color: '#93c5fd',
+              textTransform: 'none',
+              fontWeight: 500,
+              borderRadius: 2,
+              paddingX: 2,
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                bgcolor: 'rgba(34, 197, 94, 0.1)',
+                boxShadow: '0 0 10px rgba(34, 197, 94, 0.6)',
+                transform: 'scale(1.05)',
+                color: '#4ade80',
+              },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
+            }}
+          >
+            💰 Lend
+          </Button>
+
+          <Button
+            onClick={() => setPage('borrowing')}
+            sx={{
+              color: '#93c5fd',
+              textTransform: 'none',
+              fontWeight: 500,
+              borderRadius: 2,
+              paddingX: 2,
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                bgcolor: 'rgba(239, 68, 68, 0.1)',
+                boxShadow: '0 0 10px rgba(239, 68, 68, 0.6)',
+                transform: 'scale(1.05)',
+                color: '#f87171',
+              },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
+            }}
+          >
+            🏦 Borrow
+          </Button>
+
+          <Button
+            onClick={() => setPage('portfolio')}
+            sx={{
+              color: '#93c5fd',
+              textTransform: 'none',
+              fontWeight: 500,
+              borderRadius: 2,
+              paddingX: 2,
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                bgcolor: 'rgba(168, 85, 247, 0.1)',
+                boxShadow: '0 0 10px rgba(168, 85, 247, 0.6)',
+                transform: 'scale(1.05)',
+                color: '#c084fc',
+              },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
+            }}
+          >
+            📊 Portfolio
           </Button>
 
           <Button
@@ -68,28 +137,6 @@ export default function Navbar({ setPage }) {
             }}
           >
             About
-          </Button>
-
-          <Button
-            onClick={() => setPage('resources')}
-            sx={{
-              color: '#93c5fd',
-              textTransform: 'none',
-              fontWeight: 500,
-              borderRadius: 2,
-              paddingX: 2,
-              transition: 'all 0.3s ease-in-out',
-              '&:hover': {
-                bgcolor: 'rgba(147, 197, 255, 0.1)',
-                boxShadow: '0 0 10px rgba(147, 197, 255, 0.6)',
-                transform: 'scale(1.05)',
-              },
-              '&:active': {
-                transform: 'scale(0.98)',
-              },
-            }}
-          >
-            Resources
           </Button>
         </Box>
       </Toolbar>

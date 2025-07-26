@@ -10,6 +10,7 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
   const handleSubmit = (e) => {
     e.preventDefault();
     if (amount && days) {
+      // Pass amount and days - token is already in parent state
       onCalculate({ amount, days });
     }
   };
@@ -95,14 +96,21 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
         type="submit"
         fullWidth
         variant="contained"
-        disabled={loading || !amount || !days}
+        disabled={loading}
+        className="rainbow-button"
         sx={{
+          mt: 3,
+          mb: 1,
           fontWeight: 'bold',
           borderRadius: 2,
           padding: '0.8rem',
           textTransform: 'uppercase',
           letterSpacing: '1px',
           fontSize: '1.1rem',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 1,
           background: calculationType === 'lending' 
             ? 'linear-gradient(135deg, #4ade80, #22c55e)' 
             : 'linear-gradient(135deg, #f87171, #ef4444)',
@@ -110,14 +118,6 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
             background: calculationType === 'lending'
               ? 'linear-gradient(135deg, #22c55e, #16a34a)'
               : 'linear-gradient(135deg, #ef4444, #dc2626)',
-            transform: 'translateY(-2px)',
-            boxShadow: calculationType === 'lending'
-              ? '0 10px 20px rgba(34, 197, 94, 0.4)'
-              : '0 10px 20px rgba(239, 68, 68, 0.4)'
-          },
-          '&:disabled': {
-            background: '#4b5563',
-            color: '#9ca3af'
           }
         }}
       >

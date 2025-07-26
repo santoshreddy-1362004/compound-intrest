@@ -2,9 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Lending from './pages/Lending';
+import Borrowing from './pages/Borrowing';
+import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Resources from './pages/Resources';
 import Footer from './components/Footer';
+import { PortfolioProvider } from './context/PortfolioContext';
 
 function App() {
   const [page, setPage] = useState('home');
@@ -51,23 +55,28 @@ function App() {
   }, []);
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        fontFamily: 'Inter, sans-serif',
-        background: 'radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)',
-        overflow: 'hidden',
-        position: 'relative',
-        color: '#ffffff',
-      }}
-    >  
-      <Navbar setPage={setPage} />
-      <div style={{ padding: '2rem' }}>
-        {page === 'home' && <Home />}
-        {page === 'about' && <About />}
-        {page === 'resources' && <Resources />}
+    <PortfolioProvider>
+      <div
+        style={{
+          minHeight: '100vh',
+          fontFamily: 'Inter, sans-serif',
+          background: 'radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)',
+          overflow: 'hidden',
+          position: 'relative',
+          color: '#ffffff',
+        }}
+      >  
+        <Navbar setPage={setPage} />
+        <div style={{ padding: '2rem' }}>
+          {page === 'home' && <Home />}
+          {page === 'lending' && <Lending />}
+          {page === 'borrowing' && <Borrowing />}
+          {page === 'portfolio' && <Portfolio />}
+          {page === 'about' && <About />}
+          {page === 'resources' && <Resources />}
+        </div>
       </div>
-    </div>
+    </PortfolioProvider>
   );
 }
 

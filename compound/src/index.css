@@ -116,6 +116,7 @@ body {
   animation-play-state: paused;
   transform: scale(1.05);
 }
+
 .glass-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -139,4 +140,57 @@ body {
   color: #cbd5e1;
   font-size: 1rem;
   margin-top: 0.5rem;
+}
+
+/* New lending/borrowing specific styles */
+.lending-glow {
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.4), 0 0 25px rgba(34, 197, 94, 0.2);
+}
+
+.borrowing-glow {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4), 0 0 25px rgba(239, 68, 68, 0.2);
+}
+
+.portfolio-glow {
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), 0 0 25px rgba(168, 85, 247, 0.2);
+}
+
+.health-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.health-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.health-indicator:hover::before {
+  left: 100%;
+}
+
+/* Table styling for portfolio */
+.MuiTableCell-root {
+  border-bottom: 1px solid #334155 !important;
+}
+
+/* Responsive glow effects */
+@media (max-width: 768px) {
+  .glow-card {
+    box-shadow: 0 0 8px rgba(147, 197, 255, 0.4), 0 0 16px rgba(147, 197, 255, 0.2);
+  }
+  
+  .lending-glow {
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.3), 0 0 20px rgba(34, 197, 94, 0.1);
+  }
+  
+  .borrowing-glow {
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.3), 0 0 20px rgba(239, 68, 68, 0.1);
+  }
 }

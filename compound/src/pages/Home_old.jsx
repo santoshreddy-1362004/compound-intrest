@@ -12,7 +12,7 @@ export default function Home() {
   const [result, setResult] = useState(null);
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [calculationType, setCalculationType] = useState('lending');
+  const [calculationType, setCalculationType] = useState('lending'); // New state for toggle
 
   const handleTokenChange = (newToken) => {
     setToken(newToken);
@@ -22,7 +22,7 @@ export default function Home() {
   const handleCalculationTypeChange = (event, newType) => {
     if (newType !== null) {
       setCalculationType(newType);
-      setResult(null);
+      setResult(null); // Clear previous results
       setChartData([]);
     }
   };
@@ -71,22 +71,21 @@ export default function Home() {
         finalBalance, 
         token,
         apr: apr.toFixed(3) + `% (Real Compound V3 ${calculationType === 'lending' ? 'Supply' : 'Borrow'} Rate)`,
-        interest: (finalBalance - amount).toFixed(2),
-        calculationType,
         isRealData: true 
       });
       setChartData(data);
-
     } catch (error) {
-      console.error('❌ Error calculating interest:', error);
-      // Fallback rates
-      const fallbackRate = calculationType === 'lending' ? 2.5 : 4.5;
-      const finalBalance = calculateInterest(amount, fallbackRate, days);
+      console.error('Failed to fetch live APR:', error);
+      // Don't show alert, just use default rate silently
+      console.log('🔄 Using default rate of 4.5%');
+      const apr = 4.5;
+      const finalBalance = calculateInterest(amount, apr, days);
       
+      // Generate chart data with default rate
       const data = [];
       data.push({ name: 'Day 0', value: parseFloat(amount) });
       for (let i = 1; i <= days; i++) {
-        const balance = calculateInterest(amount, fallbackRate, i);
+        const balance = calculateInterest(amount, apr, i);
         data.push({ name: `Day ${i}`, value: parseFloat(balance.toFixed(2)) });
       }
       
@@ -94,10 +93,8 @@ export default function Home() {
         amount, 
         days, 
         finalBalance, 
-        token,
-        apr: `${fallbackRate}% (fallback)`,
-        interest: (finalBalance - amount).toFixed(2),
-        calculationType,
+        token, 
+        apr: '4.5% (fallback)',
         isRealData: false 
       });
       setChartData(data);
@@ -107,67 +104,59 @@ export default function Home() {
   };
 
   return (
-    <Box sx={{ py: 4 }}>
-      {/* Hero Section */}
-      <Box className="glow-card" textAlign="center" p={4} mb={4}>
-        <Typography variant="h3" className="electric-text" gutterBottom>
-          ⚡ DeFi Interest Calculator
-        </Typography>
-        <Typography variant="h6" sx={{ color: '#bfdbfe', mb: 3 }}>
-          Calculate real Compound Protocol rates for lending and borrowing
-        </Typography>
-        
-        {/* Calculation Type Toggle */}
-        <Paper 
-          elevation={0} 
-          sx={{ 
-            p: 1, 
-            bgcolor: 'rgba(30, 41, 59, 0.8)', 
-            border: '1px solid rgba(147, 197, 255, 0.3)',
-            borderRadius: 2,
-            display: 'inline-block'
-          }}
-        >
-          <ToggleButtonGroup
-            value={calculationType}
-            exclusive
-            onChange={handleCalculationTypeChange}
-            sx={{
-              '& .MuiToggleButton-root': {
-                color: '#94a3b8',
-                border: 'none',
-                px: 3,
-                py: 1,
-                '&.Mui-selected': {
-                  bgcolor: calculationType === 'lending' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.2)',
-                  color: calculationType === 'lending' ? '#4ade80' : '#f87171',
-                  '&:hover': {
-                    bgcolor: calculationType === 'lending' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)',
-                  }
-                },
-                '&:hover': {
-                  bgcolor: 'rgba(147, 197, 255, 0.1)',
-                }
-              }
-            }}
-          >
-            <ToggleButton value="lending">
-              💰 Lending Calculator
-            </ToggleButton>
-            <ToggleButton value="borrowing">
-              🏦 Borrowing Calculator
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Paper>
-      </Box>
+    <div>
+      {/* Hero Banner */}
+      <div className="glow-card" style={{ marginBottom: '1.5rem', textAlign: 'center', padding: '1rem' }}>
+        <h2 style={{
+          margin: 0,
+          color: '#f1f5f9',
+          fontWeight: '600',
+          fontSize: '1.8rem',
+          animation: 'glow 2s ease-in-out infinite',
+          fontFamily: '"Inter", sans-serif'
+        }}>
+          ⚡ Compound Interest Calculator
+        </h2>
+        <p style={{
+          margin: '0.5rem 0 0 0',
+          color: '#cbd5e1',
+          fontSize: '1rem'
+        }}>
+          See how your assets grow over time using Compound Finance.
+        </p>
 
-      {/* Calculator Components */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        <TokenSelector token={token} onTokenChange={handleTokenChange} />
-        <InterestForm onCalculate={handleCalculate} loading={loading} calculationType={calculationType} />
-        {result && <ResultsDisplay result={result} />}
-        {chartData.length > 0 && <InterestChart data={chartData} calculationType={calculationType} />}
-      </Box>
-    </Box>
+        <style jsx>{`
+          @keyframes glow {
+            0%, 100% {
+              text-shadow: 0 0 5px #f1f5f9, 0 0 10px #f1f5f9;
+            }
+            21% {
+              text-shadow: 0 0 10px #f8fafc, 0 0 20px #f8fafc;
+            }
+          }
+        `}</style>
+      </div>
+
+      {/* Main Layout */}
+      <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap', marginTop: '2rem' }}>
+        {/* Left Side */}
+        <div style={{ flex: 1, minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <TokenSelector onTokenChange={handleTokenChange} />
+          <InterestForm token={token} onCalculate={handleCalculate} loading={loading} />
+          <ResultsDisplay result={result} />
+        </div>
+
+        {/* Right Side */}
+        <div style={{ flex: 1, minWidth: '300px' }}>
+          {chartData.length > 0 ? (
+            <InterestChart data={chartData} />
+          ) : (
+            <div className="chart-container" style={{ textAlign: 'center', padding: '2rem' }}>
+              <p style={{ color: '#cbd5e1' }}>Enter values to see the interest growth chart.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
