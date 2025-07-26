@@ -2,7 +2,8 @@
 
 A comprehensive decentralized finance (DeFi) platform built on top of Compound Protocol, providing real-time lending, borrowing, and portfolio management capabilities.
 
-![Platform Screenshot](./public/calculator-illustration.png)
+## working link
+https://compound-intrest-omega.vercel.app/
 
 
 ## 🌟 Features
