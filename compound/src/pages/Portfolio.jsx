@@ -6,6 +6,7 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { usePortfolio } from '../context/PortfolioContext';
+import Footer from '../components/Footer';
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true);
@@ -337,6 +338,9 @@ export default function Portfolio() {
           </Grid>
         </Grid>
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }

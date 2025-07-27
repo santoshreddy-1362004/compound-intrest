@@ -5,6 +5,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { getSupplyRate } from '../utils/compound';
 import { usePortfolio } from '../context/PortfolioContext';
+import Footer from '../components/Footer';
 
 const tokens = [
   { symbol: 'DAI', name: 'Dai Stablecoin', color: '#f59e0b' },
@@ -271,6 +272,9 @@ export default function Lending() {
           </Grid>
         </Grid>
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }

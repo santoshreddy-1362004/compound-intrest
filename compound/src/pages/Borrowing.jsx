@@ -6,6 +6,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import SecurityIcon from '@mui/icons-material/Security';
 import { getBorrowRate } from '../utils/compound';
 import { usePortfolio } from '../context/PortfolioContext';
+import Footer from '../components/Footer';
 
 const tokens = [
   { symbol: 'DAI', name: 'Dai Stablecoin', color: '#f59e0b' },
@@ -317,6 +318,9 @@ export default function Borrowing() {
           </Grid>
         </Grid>
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }

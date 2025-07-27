@@ -69,6 +69,38 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
         }}
       />
 
+      {/* Quick Amount Buttons */}
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="body2" sx={{ color: '#94a3b8', mb: 1 }}>
+          Quick Amount Selection:
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          {['1000', '5000', '10000', '25000'].map((quickAmount) => (
+            <Box
+              key={quickAmount}
+              onClick={() => setAmount(quickAmount)}
+              sx={{
+                cursor: 'pointer',
+                px: 2,
+                py: 0.5,
+                border: '1px solid #93c5fd',
+                borderRadius: 1,
+                bgcolor: amount === quickAmount ? 'rgba(96, 165, 250, 0.2)' : 'transparent',
+                color: amount === quickAmount ? '#60a5fa' : '#94a3b8',
+                fontSize: '0.8rem',
+                '&:hover': {
+                  bgcolor: 'rgba(96, 165, 250, 0.1)',
+                  color: '#60a5fa'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              ${quickAmount}
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
       <TextField
         fullWidth
         type="number"
@@ -77,7 +109,7 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
         value={days}
         onChange={(e) => setDays(e.target.value)}
         sx={{
-          mb: 3,
+          mb: 2,
           '& .MuiOutlinedInput-root': {
             color: '#f8fafc',
             '& fieldset': { borderColor: '#93c5fd' },
@@ -90,6 +122,43 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
           }
         }}
       />
+
+      {/* Quick Days Buttons */}
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="body2" sx={{ color: '#94a3b8', mb: 1 }}>
+          Quick Time Period:
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          {[
+            { days: '30', label: '1 Month' },
+            { days: '90', label: '3 Months' },
+            { days: '180', label: '6 Months' },
+            { days: '365', label: '1 Year' }
+          ].map(({ days: quickDays, label }) => (
+            <Box
+              key={quickDays}
+              onClick={() => setDays(quickDays)}
+              sx={{
+                cursor: 'pointer',
+                px: 2,
+                py: 0.5,
+                border: '1px solid #93c5fd',
+                borderRadius: 1,
+                bgcolor: days === quickDays ? 'rgba(96, 165, 250, 0.2)' : 'transparent',
+                color: days === quickDays ? '#60a5fa' : '#94a3b8',
+                fontSize: '0.8rem',
+                '&:hover': {
+                  bgcolor: 'rgba(96, 165, 250, 0.1)',
+                  color: '#60a5fa'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {label}
+            </Box>
+          ))}
+        </Box>
+      </Box>
 
       <Button
         type="submit"

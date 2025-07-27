@@ -5,6 +5,7 @@ import TokenSelector from '../components/TokenSelector';
 import InterestForm from '../components/InterestForm';
 import ResultsDisplay from '../components/ResultsDisplay';
 import InterestChart from '../components/InterestChart';
+import Footer from '../components/Footer';
 import { calculateInterest } from '../utils/interestCalculator';
 
 export default function Home() {
@@ -109,11 +110,11 @@ export default function Home() {
   return (
     <Box sx={{ py: 4 }}>
       {/* Hero Section */}
-      <Box className="glow-card" textAlign="center" p={4} mb={4}>
-        <Typography variant="h3" className="electric-text" gutterBottom>
+      <Box className="glow-card" textAlign="center" p={2} mb={3}>
+        <Typography variant="h4" className="electric-text" gutterBottom>
           ⚡ DeFi Interest Calculator
         </Typography>
-        <Typography variant="h6" sx={{ color: '#bfdbfe', mb: 3 }}>
+        <Typography variant="body1" sx={{ color: '#bfdbfe', mb: 2 }}>
           Calculate real Compound Protocol rates for lending and borrowing
         </Typography>
         
@@ -121,7 +122,7 @@ export default function Home() {
         <Paper 
           elevation={0} 
           sx={{ 
-            p: 1, 
+            p: 0.5, 
             bgcolor: 'rgba(30, 41, 59, 0.8)', 
             border: '1px solid rgba(147, 197, 255, 0.3)',
             borderRadius: 2,
@@ -132,12 +133,14 @@ export default function Home() {
             value={calculationType}
             exclusive
             onChange={handleCalculationTypeChange}
+            size="small"
             sx={{
               '& .MuiToggleButton-root': {
                 color: '#94a3b8',
                 border: 'none',
-                px: 3,
-                py: 1,
+                px: 2,
+                py: 0.5,
+                fontSize: '0.9rem',
                 '&.Mui-selected': {
                   bgcolor: calculationType === 'lending' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.2)',
                   color: calculationType === 'lending' ? '#4ade80' : '#f87171',
@@ -152,10 +155,10 @@ export default function Home() {
             }}
           >
             <ToggleButton value="lending">
-              💰 Lending Calculator
+              💰 Lending
             </ToggleButton>
             <ToggleButton value="borrowing">
-              🏦 Borrowing Calculator
+              🏦 Borrowing
             </ToggleButton>
           </ToggleButtonGroup>
         </Paper>
@@ -163,11 +166,231 @@ export default function Home() {
 
       {/* Calculator Components */}
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        <TokenSelector token={token} onTokenChange={handleTokenChange} />
-        <InterestForm onCalculate={handleCalculate} loading={loading} calculationType={calculationType} />
-        {result && <ResultsDisplay result={result} />}
-        {chartData.length > 0 && <InterestChart data={chartData} calculationType={calculationType} />}
+        {/* Demo Scenarios Section */}
+        <Box className="glow-card" sx={{ p: 2, textAlign: 'center' }}>
+          <Typography variant="body1" sx={{ color: '#60a5fa', mb: 1.5, fontWeight: 'bold' }}>
+            🚀 Try Demo Scenarios
+          </Typography>
+          <Box sx={{ 
+            display: 'flex', 
+            flexWrap: 'wrap', 
+            gap: 1.5, 
+            justifyContent: 'center' 
+          }}>
+            <Box
+              onClick={() => handleCalculate({ amount: '1000', days: '30' })}
+              sx={{
+                cursor: 'pointer',
+                p: 1.5,
+                border: '1px solid #93c5fd',
+                borderRadius: 1.5,
+                bgcolor: 'rgba(34, 197, 94, 0.1)',
+                minWidth: '140px',
+                '&:hover': {
+                  bgcolor: 'rgba(34, 197, 94, 0.2)',
+                  transform: 'translateY(-1px)',
+                  boxShadow: '0 3px 6px rgba(34, 197, 94, 0.3)'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <Typography variant="caption" sx={{ color: '#4ade80', fontWeight: 'bold', display: 'block' }}>
+                💰 Monthly
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#bfdbfe', fontSize: '0.75rem' }}>
+                $1,000 • 30 days
+              </Typography>
+            </Box>
+            
+            <Box
+              onClick={() => handleCalculate({ amount: '5000', days: '365' })}
+              sx={{
+                cursor: 'pointer',
+                p: 1.5,
+                border: '1px solid #93c5fd',
+                borderRadius: 1.5,
+                bgcolor: 'rgba(34, 197, 94, 0.1)',
+                minWidth: '140px',
+                '&:hover': {
+                  bgcolor: 'rgba(34, 197, 94, 0.2)',
+                  transform: 'translateY(-1px)',
+                  boxShadow: '0 3px 6px rgba(34, 197, 94, 0.3)'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <Typography variant="caption" sx={{ color: '#4ade80', fontWeight: 'bold', display: 'block' }}>
+                📈 Yearly
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#bfdbfe', fontSize: '0.75rem' }}>
+                $5,000 • 1 year
+              </Typography>
+            </Box>
+            
+            <Box
+              onClick={() => handleCalculate({ amount: '10000', days: '90' })}
+              sx={{
+                cursor: 'pointer',
+                p: 1.5,
+                border: '1px solid #93c5fd',
+                borderRadius: 1.5,
+                bgcolor: 'rgba(34, 197, 94, 0.1)',
+                minWidth: '140px',
+                '&:hover': {
+                  bgcolor: 'rgba(34, 197, 94, 0.2)',
+                  transform: 'translateY(-1px)',
+                  boxShadow: '0 3px 6px rgba(34, 197, 94, 0.3)'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <Typography variant="caption" sx={{ color: '#4ade80', fontWeight: 'bold', display: 'block' }}>
+                🎯 Quarterly
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#bfdbfe', fontSize: '0.75rem' }}>
+                $10,000 • 90 days
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Top Row: Token Selector and Results Display */}
+        <Box sx={{ 
+          display: 'flex', 
+          gap: 3,
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: 'flex-start'
+        }}>
+          <Box sx={{ flex: 1 }}>
+            <TokenSelector token={token} onTokenChange={handleTokenChange} />
+          </Box>
+          <Box sx={{ 
+            flex: 1,
+            minHeight: '200px',
+            display: 'flex',
+            alignItems: 'flex-start'
+          }}>
+            {result ? (
+              <Box sx={{ width: '100%' }}>
+                <ResultsDisplay result={result} />
+              </Box>
+            ) : (
+              <Box sx={{ 
+                width: '100%', 
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#64748b',
+                textAlign: 'center',
+                p: 3
+              }}>
+                <Typography variant="h6" sx={{ color: '#60a5fa', mb: 2 }}>
+                  📊 Results Preview
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 2, fontStyle: 'italic' }}>
+                  Your calculation results will appear here
+                </Typography>
+                <Box sx={{ 
+                  p: 2, 
+                  border: '1px dashed #475569', 
+                  borderRadius: 2,
+                  bgcolor: 'rgba(30, 41, 59, 0.3)',
+                  width: '100%',
+                  maxWidth: '300px'
+                }}>
+                  <Typography variant="body2" sx={{ color: '#94a3b8', mb: 1 }}>
+                    📈 Expected Information:
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#64748b', display: 'block' }}>
+                    • Final balance amount<br/>
+                    • Interest earned/paid<br/>
+                    • Real APR from Compound<br/>
+                    • Calculation breakdown
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </Box>
+
+        {/* Bottom Row: Interest Form and Chart */}
+        <Box sx={{ 
+          display: 'flex', 
+          gap: 3,
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: 'flex-start'
+        }}>
+          <Box sx={{ flex: 1 }}>
+            <InterestForm onCalculate={handleCalculate} loading={loading} calculationType={calculationType} />
+          </Box>
+          <Box sx={{ 
+            flex: 1,
+            minHeight: '400px',
+            display: 'flex',
+            alignItems: 'flex-start'
+          }}>
+            {chartData.length > 0 ? (
+              <Box sx={{ width: '100%' }}>
+                <InterestChart data={chartData} calculationType={calculationType} />
+              </Box>
+            ) : (
+              <Box sx={{ 
+                width: '100%', 
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#64748b',
+                textAlign: 'center',
+                p: 3
+              }}>
+                <Typography variant="h6" sx={{ color: '#60a5fa', mb: 2 }}>
+                  📈 Interactive Chart
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 2, fontStyle: 'italic' }}>
+                  Dynamic growth visualization will appear here
+                </Typography>
+                <Box sx={{ 
+                  p: 3, 
+                  border: '1px dashed #475569', 
+                  borderRadius: 2,
+                  bgcolor: 'rgba(30, 41, 59, 0.3)',
+                  width: '100%',
+                  maxWidth: '350px'
+                }}>
+                  <Typography variant="body2" sx={{ color: '#94a3b8', mb: 2 }}>
+                    📊 Chart Features:
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#64748b', display: 'block' }}>
+                    • Day-by-day growth tracking<br/>
+                    • Interactive data points<br/>
+                    • Color-coded lending/borrowing<br/>
+                    • Responsive design<br/>
+                    • Real-time updates
+                  </Typography>
+                  <Box sx={{ 
+                    mt: 2, 
+                    p: 1, 
+                    bgcolor: 'rgba(96, 165, 250, 0.1)', 
+                    borderRadius: 1,
+                    border: '1px solid rgba(96, 165, 250, 0.3)'
+                  }}>
+                    <Typography variant="caption" sx={{ color: '#60a5fa' }}>
+                      💡 Tip: Try the demo scenarios above!
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </Box>
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }

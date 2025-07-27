@@ -1,6 +1,7 @@
 // src/pages/Resources.jsx
 import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
+import Footer from '../components/Footer';
 
 const cardData = [
   {
@@ -121,6 +122,9 @@ export default function Resources() {
           </Typography>
         </Box>
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }
