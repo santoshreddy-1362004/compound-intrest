@@ -2,10 +2,25 @@
 import React from 'react';
 import { AppBar, Toolbar, Button, Typography, Box } from '@mui/material';
 import compoundLogo from '../assets/compound-logo.png'; // add your Compound logo here
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar({ setPage }) {
+  const { darkMode } = useTheme();
+  
+  const navbarBg = darkMode 
+    ? 'rgba(30, 41, 59, 0.9)' 
+    : 'rgba(255, 255, 255, 0.9)';
+    
+  const textColor = darkMode ? '#f1f5f9' : '#1e293b';
+  const linkColor = darkMode ? '#93c5fd' : '#3b82f6';
+
   return (
-    <AppBar position="static" sx={{ bgcolor: 'rgba(30, 41, 59, 0.9)', backdropFilter: 'blur(10px)' }}>
+    <AppBar position="static" sx={{ 
+      bgcolor: navbarBg, 
+      backdropFilter: 'blur(10px)',
+      borderBottom: darkMode ? 'none' : '1px solid rgba(226, 232, 240, 0.8)'
+    }}>
       <Toolbar>
         <Box display="flex" alignItems="center" gap={1}>
           <img src={compoundLogo} alt="Compound Logo" style={{ height: '28px' }} />
@@ -13,7 +28,7 @@ export default function Navbar({ setPage }) {
   variant="h6"
   component="div"
   sx={{
-    color: '#f1f5f9',
+    color: textColor,
     fontWeight: 600,
     letterSpacing: '0.5px'
   }}
@@ -25,19 +40,19 @@ export default function Navbar({ setPage }) {
         <Box flexGrow={1} />
 
         {/* Glowing Navbar Links */}
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <Button
             onClick={() => setPage('home')}
             sx={{
-              color: '#93c5fd',
+              color: linkColor,
               textTransform: 'none',
               fontWeight: 500,
               borderRadius: 2,
               paddingX: 2,
               transition: 'all 0.3s ease-in-out',
               '&:hover': {
-                bgcolor: 'rgba(147, 197, 255, 0.1)',
-                boxShadow: '0 0 10px rgba(147, 197, 255, 0.6)',
+                bgcolor: darkMode ? 'rgba(147, 197, 255, 0.1)' : 'rgba(59, 130, 246, 0.1)',
+                boxShadow: `0 0 10px ${darkMode ? 'rgba(147, 197, 255, 0.6)' : 'rgba(59, 130, 246, 0.6)'}`,
                 transform: 'scale(1.05)',
               },
               '&:active': {
@@ -51,7 +66,7 @@ export default function Navbar({ setPage }) {
           <Button
             onClick={() => setPage('lending')}
             sx={{
-              color: '#93c5fd',
+              color: linkColor,
               textTransform: 'none',
               fontWeight: 500,
               borderRadius: 2,
@@ -74,7 +89,7 @@ export default function Navbar({ setPage }) {
           <Button
             onClick={() => setPage('borrowing')}
             sx={{
-              color: '#93c5fd',
+              color: linkColor,
               textTransform: 'none',
               fontWeight: 500,
               borderRadius: 2,
@@ -97,7 +112,7 @@ export default function Navbar({ setPage }) {
           <Button
             onClick={() => setPage('portfolio')}
             sx={{
-              color: '#93c5fd',
+              color: linkColor,
               textTransform: 'none',
               fontWeight: 500,
               borderRadius: 2,
@@ -120,15 +135,15 @@ export default function Navbar({ setPage }) {
           <Button
             onClick={() => setPage('about')}
             sx={{
-              color: '#93c5fd',
+              color: linkColor,
               textTransform: 'none',
               fontWeight: 500,
               borderRadius: 2,
               paddingX: 2,
               transition: 'all 0.3s ease-in-out',
               '&:hover': {
-                bgcolor: 'rgba(147, 197, 255, 0.1)',
-                boxShadow: '0 0 10px rgba(147, 197, 255, 0.6)',
+                bgcolor: darkMode ? 'rgba(147, 197, 255, 0.1)' : 'rgba(59, 130, 246, 0.1)',
+                boxShadow: `0 0 10px ${darkMode ? 'rgba(147, 197, 255, 0.6)' : 'rgba(59, 130, 246, 0.6)'}`,
                 transform: 'scale(1.05)',
               },
               '&:active': {
@@ -142,7 +157,7 @@ export default function Navbar({ setPage }) {
           <Button
             onClick={() => setPage('resources')}
             sx={{
-              color: '#93c5fd',
+              color: linkColor,
               textTransform: 'none',
               fontWeight: 500,
               borderRadius: 2,
@@ -161,6 +176,9 @@ export default function Navbar({ setPage }) {
           >
             🔗 Resources
           </Button>
+          
+          {/* Theme Toggle Button */}
+          <ThemeToggle sx={{ ml: 2 }} />
         </Box>
       </Toolbar>
     </AppBar>

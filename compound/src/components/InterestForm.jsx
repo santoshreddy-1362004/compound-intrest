@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import CalculateIcon from '@mui/icons-material/Calculate';
+import { useTheme } from '../context/ThemeContext';
 
 export default function InterestForm({ token, onCalculate, loading = false, calculationType = 'lending' }) {
   const [amount, setAmount] = useState('');
   const [days, setDays] = useState('');
+  const { darkMode } = useTheme();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,21 +59,34 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
         sx={{
           mb: 2,
           '& .MuiOutlinedInput-root': {
-            color: '#f8fafc',
-            '& fieldset': { borderColor: '#93c5fd' },
-            '&:hover fieldset': { borderColor: '#60a5fa' },
-            '&.Mui-focused fieldset': { borderColor: '#60a5fa' }
+            color: darkMode ? '#f8fafc' : '#1e293b',
+            backgroundColor: darkMode ? 'transparent' : 'rgba(255, 255, 255, 0.9)',
+            '& fieldset': { 
+              borderColor: darkMode ? '#93c5fd' : '#3b82f6' 
+            },
+            '&:hover fieldset': { 
+              borderColor: darkMode ? '#60a5fa' : '#2563eb' 
+            },
+            '&.Mui-focused fieldset': { 
+              borderColor: darkMode ? '#60a5fa' : '#2563eb' 
+            }
           },
           '& .MuiInputLabel-root': { 
-            color: '#94a3b8',
-            '&.Mui-focused': { color: '#60a5fa' }
+            color: darkMode ? '#94a3b8' : '#64748b',
+            '&.Mui-focused': { 
+              color: darkMode ? '#60a5fa' : '#2563eb' 
+            }
+          },
+          '& .MuiOutlinedInput-input::placeholder': {
+            color: darkMode ? '#64748b' : '#94a3b8',
+            opacity: 1
           }
         }}
       />
 
       {/* Quick Amount Buttons */}
       <Box sx={{ mb: 2 }}>
-        <Typography variant="body2" sx={{ color: '#94a3b8', mb: 1 }}>
+        <Typography variant="body2" sx={{ color: darkMode ? '#94a3b8' : '#64748b', mb: 1 }}>
           Quick Amount Selection:
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
@@ -83,14 +98,18 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
                 cursor: 'pointer',
                 px: 2,
                 py: 0.5,
-                border: '1px solid #93c5fd',
+                border: darkMode ? '1px solid #93c5fd' : '1px solid #3b82f6',
                 borderRadius: 1,
-                bgcolor: amount === quickAmount ? 'rgba(96, 165, 250, 0.2)' : 'transparent',
-                color: amount === quickAmount ? '#60a5fa' : '#94a3b8',
+                bgcolor: amount === quickAmount 
+                  ? (darkMode ? 'rgba(96, 165, 250, 0.2)' : 'rgba(59, 130, 246, 0.2)')
+                  : 'transparent',
+                color: amount === quickAmount 
+                  ? (darkMode ? '#60a5fa' : '#2563eb')
+                  : (darkMode ? '#94a3b8' : '#64748b'),
                 fontSize: '0.8rem',
                 '&:hover': {
-                  bgcolor: 'rgba(96, 165, 250, 0.1)',
-                  color: '#60a5fa'
+                  bgcolor: darkMode ? 'rgba(96, 165, 250, 0.1)' : 'rgba(59, 130, 246, 0.1)',
+                  color: darkMode ? '#60a5fa' : '#2563eb'
                 },
                 transition: 'all 0.2s ease'
               }}
@@ -111,21 +130,34 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
         sx={{
           mb: 2,
           '& .MuiOutlinedInput-root': {
-            color: '#f8fafc',
-            '& fieldset': { borderColor: '#93c5fd' },
-            '&:hover fieldset': { borderColor: '#60a5fa' },
-            '&.Mui-focused fieldset': { borderColor: '#60a5fa' }
+            color: darkMode ? '#f8fafc' : '#1e293b',
+            backgroundColor: darkMode ? 'transparent' : 'rgba(255, 255, 255, 0.9)',
+            '& fieldset': { 
+              borderColor: darkMode ? '#93c5fd' : '#3b82f6' 
+            },
+            '&:hover fieldset': { 
+              borderColor: darkMode ? '#60a5fa' : '#2563eb' 
+            },
+            '&.Mui-focused fieldset': { 
+              borderColor: darkMode ? '#60a5fa' : '#2563eb' 
+            }
           },
           '& .MuiInputLabel-root': { 
-            color: '#94a3b8',
-            '&.Mui-focused': { color: '#60a5fa' }
+            color: darkMode ? '#94a3b8' : '#64748b',
+            '&.Mui-focused': { 
+              color: darkMode ? '#60a5fa' : '#2563eb' 
+            }
+          },
+          '& .MuiOutlinedInput-input::placeholder': {
+            color: darkMode ? '#64748b' : '#94a3b8',
+            opacity: 1
           }
         }}
       />
 
       {/* Quick Days Buttons */}
       <Box sx={{ mb: 3 }}>
-        <Typography variant="body2" sx={{ color: '#94a3b8', mb: 1 }}>
+        <Typography variant="body2" sx={{ color: darkMode ? '#94a3b8' : '#64748b', mb: 1 }}>
           Quick Time Period:
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
@@ -142,14 +174,18 @@ export default function InterestForm({ token, onCalculate, loading = false, calc
                 cursor: 'pointer',
                 px: 2,
                 py: 0.5,
-                border: '1px solid #93c5fd',
+                border: darkMode ? '1px solid #93c5fd' : '1px solid #3b82f6',
                 borderRadius: 1,
-                bgcolor: days === quickDays ? 'rgba(96, 165, 250, 0.2)' : 'transparent',
-                color: days === quickDays ? '#60a5fa' : '#94a3b8',
+                bgcolor: days === quickDays 
+                  ? (darkMode ? 'rgba(96, 165, 250, 0.2)' : 'rgba(59, 130, 246, 0.2)')
+                  : 'transparent',
+                color: days === quickDays 
+                  ? (darkMode ? '#60a5fa' : '#2563eb')
+                  : (darkMode ? '#94a3b8' : '#64748b'),
                 fontSize: '0.8rem',
                 '&:hover': {
-                  bgcolor: 'rgba(96, 165, 250, 0.1)',
-                  color: '#60a5fa'
+                  bgcolor: darkMode ? 'rgba(96, 165, 250, 0.1)' : 'rgba(59, 130, 246, 0.1)',
+                  color: darkMode ? '#60a5fa' : '#2563eb'
                 },
                 transition: 'all 0.2s ease'
               }}

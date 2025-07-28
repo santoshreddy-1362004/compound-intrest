@@ -6,11 +6,13 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { usePortfolio } from '../context/PortfolioContext';
+import { useTheme } from '../context/ThemeContext';
 import Footer from '../components/Footer';
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true);
   const { portfolio } = usePortfolio();
+  const { darkMode } = useTheme();
 
   // Use real portfolio data instead of mock data
   const portfolioData = portfolio;
@@ -44,7 +46,13 @@ export default function Portfolio() {
     return (
       <Box sx={{ py: 4, textAlign: 'center' }}>
         <Typography variant="h4" className="electric-text">Loading Portfolio...</Typography>
-        <LinearProgress sx={{ mt: 2, bgcolor: '#334155', '& .MuiLinearProgress-bar': { bgcolor: '#93c5fd' } }} />
+        <LinearProgress sx={{ 
+          mt: 2, 
+          bgcolor: darkMode ? '#334155' : '#e2e8f0', 
+          '& .MuiLinearProgress-bar': { 
+            bgcolor: darkMode ? '#93c5fd' : '#3b82f6' 
+          } 
+        }} />
       </Box>
     );
   }
@@ -57,16 +65,16 @@ export default function Portfolio() {
           <Typography variant="h3" className="electric-text" gutterBottom>
             📊 Your DeFi Portfolio
           </Typography>
-          <Typography variant="h6" sx={{ color: '#bfdbfe' }}>
+          <Typography variant="h6" sx={{ color: darkMode ? '#bfdbfe' : '#64748b' }}>
             Monitor your lending and borrowing positions in real-time
           </Typography>
         </Box>
         
         <Box className="glow-card" textAlign="center" p={6}>
-          <Typography variant="h5" sx={{ color: '#94a3b8', mb: 2 }}>
+          <Typography variant="h5" sx={{ color: darkMode ? '#94a3b8' : '#64748b', mb: 2 }}>
             🏦 Your portfolio is empty
           </Typography>
-          <Typography variant="body1" sx={{ color: '#64748b' }}>
+          <Typography variant="body1" sx={{ color: darkMode ? '#64748b' : '#94a3b8' }}>
             Start by supplying assets in the Lending page or borrowing in the Borrowing page.
           </Typography>
         </Box>
@@ -83,7 +91,9 @@ export default function Portfolio() {
           textAlign: 'center', 
           p: 4, 
           mb: 4,
-          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.95) 100%)',
+          background: darkMode 
+            ? 'linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.95) 100%)'
+            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%)',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -91,7 +101,7 @@ export default function Portfolio() {
         <Typography variant="h3" className="electric-text" gutterBottom>
           📊 Portfolio Dashboard
         </Typography>
-        <Typography variant="h6" sx={{ color: '#94a3b8', mb: 3 }}>
+        <Typography variant="h6" sx={{ color: darkMode ? '#94a3b8' : '#64748b', mb: 3 }}>
           Professional DeFi Portfolio Management
         </Typography>
         
@@ -107,7 +117,7 @@ export default function Portfolio() {
             <Typography variant="h4" sx={{ color: '#4ade80', fontWeight: 'bold' }}>
               ${portfolio.totalSupplied.toLocaleString()}
             </Typography>
-            <Typography variant="caption" sx={{ color: '#94a3b8' }}>
+            <Typography variant="caption" sx={{ color: darkMode ? '#94a3b8' : '#64748b' }}>
               TOTAL SUPPLIED
             </Typography>
           </Box>
@@ -115,15 +125,15 @@ export default function Portfolio() {
             <Typography variant="h4" sx={{ color: '#ef4444', fontWeight: 'bold' }}>
               ${portfolio.totalBorrowed.toLocaleString()}
             </Typography>
-            <Typography variant="caption" sx={{ color: '#94a3b8' }}>
+            <Typography variant="caption" sx={{ color: darkMode ? '#94a3b8' : '#64748b' }}>
               TOTAL BORROWED
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="h4" sx={{ color: '#93c5fd', fontWeight: 'bold' }}>
+            <Typography variant="h4" sx={{ color: darkMode ? '#93c5fd' : '#3b82f6', fontWeight: 'bold' }}>
               ${portfolio.netWorth.toLocaleString()}
             </Typography>
-            <Typography variant="caption" sx={{ color: '#94a3b8' }}>
+            <Typography variant="caption" sx={{ color: darkMode ? '#94a3b8' : '#64748b' }}>
               NET WORTH
             </Typography>
           </Box>

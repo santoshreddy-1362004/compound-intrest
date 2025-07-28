@@ -5,6 +5,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { getSupplyRate } from '../utils/compound';
 import { usePortfolio } from '../context/PortfolioContext';
+import { useTheme } from '../context/ThemeContext';
 import Footer from '../components/Footer';
 
 const tokens = [
@@ -19,6 +20,7 @@ export default function Lending() {
   const [amounts, setAmounts] = useState({});
   const [supplying, setSupplying] = useState({});
   const { addSuppliedAsset } = usePortfolio();
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     const fetchRates = async () => {
@@ -75,7 +77,7 @@ export default function Lending() {
         <Typography variant="h3" className="electric-text" gutterBottom>
           💰 Supply & Earn
         </Typography>
-        <Typography variant="h6" sx={{ color: '#bfdbfe' }}>
+        <Typography variant="h6" sx={{ color: darkMode ? '#bfdbfe' : '#64748b' }}>
           Supply your crypto assets to Compound and start earning interest instantly
         </Typography>
       </Box>
@@ -151,14 +153,25 @@ export default function Lending() {
                     sx={{
                       mb: 3,
                       '& .MuiOutlinedInput-root': {
-                        color: '#f8fafc',
-                        '& fieldset': { borderColor: `${token.color}60` },
-                        '&:hover fieldset': { borderColor: token.color },
-                        '&.Mui-focused fieldset': { borderColor: token.color }
+                        color: darkMode ? '#f8fafc' : '#1e293b',
+                        backgroundColor: darkMode ? 'transparent' : 'rgba(255, 255, 255, 0.9)',
+                        '& fieldset': { 
+                          borderColor: darkMode ? `${token.color}60` : `${token.color}80` 
+                        },
+                        '&:hover fieldset': { 
+                          borderColor: token.color 
+                        },
+                        '&.Mui-focused fieldset': { 
+                          borderColor: token.color 
+                        }
                       },
                       '& .MuiInputLabel-root': { 
-                        color: '#94a3b8',
+                        color: darkMode ? '#94a3b8' : '#64748b',
                         '&.Mui-focused': { color: token.color }
+                      },
+                      '& .MuiOutlinedInput-input::placeholder': {
+                        color: darkMode ? '#64748b' : '#94a3b8',
+                        opacity: 1
                       }
                     }}
                   />

@@ -9,9 +9,11 @@ import About from './pages/About';
 import Resources from './pages/Resources';
 import Footer from './components/Footer';
 import { PortfolioProvider } from './context/PortfolioContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 
-function App() {
+function AppContent() {
   const [page, setPage] = useState('home');
+  const { darkMode } = useTheme();
 
   // Create animated stars
   useEffect(() => {
@@ -32,7 +34,7 @@ function App() {
         height: 100%;
         pointer-events: none;
         z-index: 1;
-        opacity: 0.8;
+        opacity: ${darkMode ? '0.8' : '0.3'};
       `;
       
       // Create different layers of stars
@@ -62,13 +64,13 @@ function App() {
             position: absolute;
             width: ${starSize};
             height: ${starSize};
-            background: white;
+            background: ${darkMode ? 'white' : '#3b82f6'};
             border-radius: 50%;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
             opacity: ${opacity};
             animation: twinkle 2s ease-in-out infinite alternate, float ${duration} linear infinite;
-            ${size === 'large' ? 'box-shadow: 0 0 6px white;' : ''}
+            ${size === 'large' ? `box-shadow: 0 0 6px ${darkMode ? 'white' : '#3b82f6'};` : ''}
           `;
           
           // Add twinkle effect to some stars
@@ -111,7 +113,11 @@ function App() {
         starsContainer.remove();
       }
     };
-  }, []);
+  }, [darkMode]);
+
+  const backgroundStyle = darkMode 
+    ? 'radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)'
+    : 'radial-gradient(ellipse at top, #e0f2fe 0%, #f8fafc 50%, #e2e8f0 100%)';
 
   return (
     <PortfolioProvider>
@@ -119,10 +125,11 @@ function App() {
         style={{
           minHeight: '100vh',
           fontFamily: 'Inter, sans-serif',
-          background: 'radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)',
+          background: backgroundStyle,
           overflow: 'hidden',
           position: 'relative',
-          color: '#ffffff',
+          color: darkMode ? '#ffffff' : '#1e293b',
+          transition: 'all 0.3s ease',
         }}
       >  
         <Navbar setPage={setPage} />
@@ -136,6 +143,14 @@ function App() {
         </div>
       </div>
     </PortfolioProvider>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

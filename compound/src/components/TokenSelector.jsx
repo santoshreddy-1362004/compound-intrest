@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { Select, MenuItem, FormControl, InputLabel, Box, Typography } from '@mui/material';
 import TokenIcon from '@mui/icons-material/Token';
+import { useTheme } from '../context/ThemeContext';
 
 export default function TokenSelector({ onTokenChange }) {
   const [token, setToken] = useState('DAI');
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     // Just notify parent of token change, don't fetch rates here
@@ -14,7 +16,7 @@ export default function TokenSelector({ onTokenChange }) {
   return (
     <Box className="glow-card" sx={{ padding: '1.5rem' }}>
       <Box display="flex" alignItems="center" gap={1} mb={2}>
-        <TokenIcon sx={{ color: '#60a5fa' }} />
+        <TokenIcon sx={{ color: darkMode ? '#60a5fa' : '#2563eb' }} />
         <Typography variant="h6" className="electric-text">
           🪙 Select Token
         </Typography>
@@ -24,13 +26,13 @@ export default function TokenSelector({ onTokenChange }) {
         <InputLabel 
           id="token-select-label" 
           sx={{
-            color: '#94a3b8',
+            color: darkMode ? '#94a3b8' : '#64748b',
             fontWeight: 'bold',
             '&.Mui-focused': {
-              color: '#60a5fa',
+              color: darkMode ? '#60a5fa' : '#2563eb',
             },
             '&.MuiFormLabel-filled': {
-              color: '#60a5fa',
+              color: darkMode ? '#60a5fa' : '#2563eb',
             }
           }}
         >
@@ -42,46 +44,43 @@ export default function TokenSelector({ onTokenChange }) {
           label="Choose Token"
           onChange={(e) => setToken(e.target.value)}
           sx={{
-            backgroundColor: 'transparent',
-            color: '#f8fafc',
+            backgroundColor: darkMode ? 'transparent' : 'rgba(255, 255, 255, 0.9)',
+            color: darkMode ? '#f8fafc' : '#1e293b',
             borderRadius: 2,
             mb: 2,
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#93c5fd',
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#60a5fa',
-            },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#60a5fa',
+              borderColor: darkMode ? '#93c5fd' : '#3b82f6',
             },
             '& .MuiSelect-select': {
-              color: '#f8fafc',
+              color: darkMode ? '#f8fafc' : '#1e293b',
               fontWeight: 'bold',
               fontSize: '1.1rem',
               py: 2
             },
-            '& .MuiSvgIcon-root': {
-              color: '#93c5fd',
+            '& .MuiSelect-icon': {
+              color: darkMode ? '#93c5fd' : '#3b82f6',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: darkMode ? '#60a5fa' : '#2563eb',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: darkMode ? '#60a5fa' : '#2563eb',
             }
           }}
           MenuProps={{
             PaperProps: {
               sx: {
-                bgcolor: '#1e293b',
-                border: '1px solid #93c5fd',
+                bgcolor: darkMode ? '#1e293b' : '#ffffff',
+                border: darkMode ? '1px solid #93c5fd' : '1px solid #3b82f6',
                 '& .MuiMenuItem-root': {
-                  color: '#e2e8f0',
+                  color: darkMode ? '#e2e8f0' : '#1e293b',
                   '&:hover': {
-                    backgroundColor: 'rgba(147, 197, 253, 0.1)',
-                    color: '#ffffff',
+                    backgroundColor: darkMode ? 'rgba(147, 197, 253, 0.1)' : 'rgba(59, 130, 246, 0.1)',
                   },
                   '&.Mui-selected': {
-                    backgroundColor: 'rgba(147, 197, 253, 0.2)',
-                    color: '#ffffff',
-                    fontWeight: 'bold',
+                    backgroundColor: darkMode ? 'rgba(147, 197, 253, 0.2)' : 'rgba(59, 130, 246, 0.2)',
                     '&:hover': {
-                      backgroundColor: 'rgba(147, 197, 253, 0.3)',
+                      backgroundColor: darkMode ? 'rgba(147, 197, 253, 0.3)' : 'rgba(59, 130, 246, 0.3)',
                     }
                   }
                 }
@@ -97,7 +96,7 @@ export default function TokenSelector({ onTokenChange }) {
         <Typography 
           variant="body2" 
           sx={{ 
-            color: '#bfdbfe', 
+            color: darkMode ? '#bfdbfe' : '#64748b', 
             textAlign: 'center',
             fontStyle: 'italic',
             mt: 1,
@@ -110,11 +109,15 @@ export default function TokenSelector({ onTokenChange }) {
         {/* Demo Rate Information */}
         <Box sx={{ 
           p: 2, 
-          bgcolor: 'rgba(96, 165, 250, 0.1)', 
+          bgcolor: darkMode ? 'rgba(96, 165, 250, 0.1)' : 'rgba(59, 130, 246, 0.1)', 
           borderRadius: 2,
-          border: '1px solid rgba(96, 165, 250, 0.3)'
+          border: darkMode ? '1px solid rgba(96, 165, 250, 0.3)' : '1px solid rgba(59, 130, 246, 0.3)'
         }}>
-          <Typography variant="body2" sx={{ color: '#60a5fa', fontWeight: 'bold', mb: 1 }}>
+          <Typography variant="body2" sx={{ 
+            color: darkMode ? '#60a5fa' : '#2563eb', 
+            fontWeight: 'bold', 
+            mb: 1 
+          }}>
             💡 Current {token} Rates (Demo)
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
@@ -127,7 +130,11 @@ export default function TokenSelector({ onTokenChange }) {
               🏦 Borrow APR: ~{token === 'DAI' ? '4.5' : token === 'USDC' ? '5.1' : '3.9'}%
             </Typography>
           </Box>
-          <Typography variant="caption" sx={{ color: '#94a3b8', display: 'block', mt: 1 }}>
+          <Typography variant="caption" sx={{ 
+            color: darkMode ? '#94a3b8' : '#64748b', 
+            display: 'block', 
+            mt: 1 
+          }}>
             * Real rates from Compound V3 Protocol
           </Typography>
         </Box>
