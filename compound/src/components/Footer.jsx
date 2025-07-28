@@ -73,7 +73,7 @@ export default function Footer() {
           fontSize: '0.75rem'
         }}
       >
-        © 2025 DeFi Interest Calculator • Educational use only
+        © 2025 DeFi Interest Calculator • MIT Licensed • Educational use only
       </Typography>
     </Box>
   );
