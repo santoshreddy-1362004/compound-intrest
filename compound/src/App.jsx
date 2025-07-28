@@ -16,25 +16,65 @@ function App() {
   // Create animated stars
   useEffect(() => {
     const createStars = () => {
+      // Remove existing stars if any
+      const existingStars = document.querySelector('.stars-container');
+      if (existingStars) {
+        existingStars.remove();
+      }
+
       const starsContainer = document.createElement('div');
       starsContainer.className = 'stars-container';
+      starsContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.8;
+      `;
       
       // Create different layers of stars
-      const starCounts = { small: 50, medium: 30, large: 20 };
+      const starCounts = { small: 80, medium: 50, large: 30 };
       
       Object.entries(starCounts).forEach(([size, count]) => {
         for (let i = 0; i < count; i++) {
           const star = document.createElement('div');
           star.className = `stars stars-${size}`;
           
-          // Add twinkle effect to some stars
-          if (Math.random() > 0.7) {
-            star.classList.add('twinkle');
+          // Set star styles directly
+          let starSize = '2px';
+          let opacity = '0.6';
+          let duration = '25s';
+          
+          if (size === 'medium') {
+            starSize = '3px';
+            opacity = '0.8';
+            duration = '20s';
+          } else if (size === 'large') {
+            starSize = '4px';
+            opacity = '1';
+            duration = '15s';
           }
           
-          // Random positioning
-          star.style.left = Math.random() * 100 + '%';
-          star.style.animationDelay = Math.random() * 20 + 's';
+          star.style.cssText = `
+            position: absolute;
+            width: ${starSize};
+            height: ${starSize};
+            background: white;
+            border-radius: 50%;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            opacity: ${opacity};
+            animation: twinkle 2s ease-in-out infinite alternate, float ${duration} linear infinite;
+            ${size === 'large' ? 'box-shadow: 0 0 6px white;' : ''}
+          `;
+          
+          // Add twinkle effect to some stars
+          if (Math.random() > 0.6) {
+            star.style.animationDelay = Math.random() * 2 + 's';
+          }
           
           starsContainer.appendChild(star);
         }
@@ -42,6 +82,25 @@ function App() {
       
       document.body.appendChild(starsContainer);
     };
+
+    // Add CSS animations if not present
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes float {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        25% { transform: translate(10px, -10px) rotate(90deg); }
+        50% { transform: translate(-5px, -20px) rotate(180deg); }
+        75% { transform: translate(-10px, -10px) rotate(270deg); }
+        100% { transform: translate(0, 0) rotate(360deg); }
+      }
+      
+      @keyframes twinkle {
+        0% { opacity: 0.3; }
+        50% { opacity: 1; }
+        100% { opacity: 0.3; }
+      }
+    `;
+    document.head.appendChild(style);
 
     createStars();
 
